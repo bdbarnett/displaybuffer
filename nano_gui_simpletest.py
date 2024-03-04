@@ -8,7 +8,7 @@ from gui.core.nanogui import refresh
 from time import ticks_ms, ticks_diff
 
 refresh(ssd, True)  # Initialise and clear display.
-# Uncomment for ePaper displays
+# Uncomment for ePaper displays; not supported by displaybuf or MPDisplay (yet).
 # ssd.wait_until_ready()
 ssd.fill(0)
 ssd.line(0, 0, ssd.width - 1, ssd.height - 1, GREEN)  # Green diagonal corner-to-corner

@@ -1,5 +1,5 @@
 """
-gui_simpletest.py - Simple test program for gui_framework.py
+displaybuf_simpletest.py - Simple test program for displaybuf.py
 """
 
 from color_setup import ssd
