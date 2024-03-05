@@ -3,18 +3,19 @@
 # SPDX-License-Identifier: MIT
 
 '''
-gui_framework.py
-FrameBuffer wrapper for using the MicroPython Nano-GUI or other
-framebuf based GUIs with MPDisplay.
+displaybuf.py
+FrameBuffer wrapper for using framebuf based GUIs with MPDisplay.
+Works with MicroPython Nano-GUI and Micro-GUI from Peter Hinch,
+but may also be used without them.
+
 Usage:
     'color_setup.py'
-        from gui_framework import SSD
-        import framebuf
+        from displaybuf import DisplayBuffer, RGB565
         import board_config
 
-        mode = framebuf.RGB565
+        format = RGB565
 
-        ssd = SSD(board_config.display_drv, mode)
+        ssd = SSD(board_config.display_drv, format)
 
     'main.py'
         from color_setup import ssd
@@ -22,20 +23,10 @@ Usage:
 '''
 
 import framebuf
-import gc
-from sys import platform
-import micropython
+from framebuf import RGB565, 
 
-
-# Determine how line buffers are allocated
+# Define how line buffers are allocated.  Allows being overridden by platforms with DMA specific allocations, such as ESP32's heap_caps.
 alloc_buffer = lambda size: bytearray(size)
-# If heap_caps is available, use it to allocate in internal DMA-capable memory
-if platform == "esp32":
-    try:
-        from heap_caps import malloc, CAP_DMA, CAP_INTERNAL
-        alloc_buffer = lambda size: malloc(size, CAP_DMA | CAP_INTERNAL)
-    except ImportError:
-        pass
 
 
 class SSD(framebuf.FrameBuffer):
