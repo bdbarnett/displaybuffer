@@ -1,5 +1,5 @@
 '''
-color_setup.py - color setup using the GUI framework
+color_setup.py - color setup for DisplayBuffer with MPDisplay
 Usage:
     from color_setup import ssd
     <your code here>
